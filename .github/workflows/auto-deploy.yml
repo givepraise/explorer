@@ -1,17 +1,17 @@
 name: auto-deploy
 
-on: [push]
+on: push
 
 jobs:
-  deploy:
-    if: github.ref == 'refs/heads/main'
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Production Autodeploy
-        if: github.ref == 'refs/heads/main'
+      - name: Production Auto-Deploy
         uses: garygrossgarten/github-action-ssh@0.7.0
         with:
-          command: cd explorer && git checkout main && git pull && pm2 restart explorer;
+          command: cd explorer && git checkout main && git pull && pm2 restart explorer
           host: ${{ secrets.PROD_HOST }}
-          username: ${{ secrets.PROD_USERNAME }}
+          username: gmadmin
           privateKey: ${{ secrets.PROD_PRIVATE_KEY}}
+        env:
+          CI: true
