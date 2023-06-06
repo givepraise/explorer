@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: Production Auto-Deploy
         if: github.ref == 'refs/heads/main'
-        uses: garygrossgarten/github-action-ssh@v0.6.4
+        uses: garygrossgarten/github-action-ssh@0.7.0
         with:
-          command: cd explorer && git checkout main && git pull && pm2 restart explorer
+          command: ls -l
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USERNAME }}
           privateKey: ${{ secrets.PROD_PRIVATE_KEY}}
