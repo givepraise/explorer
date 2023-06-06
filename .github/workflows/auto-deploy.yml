@@ -1,0 +1,19 @@
+name: auto-deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Production Auto-Deploy
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.PROD_HOST }}
+        username: ${{ secrets.PROD_USERNAME }}
+        key: ${{ secrets.PROD_PRIVATE_KEY }}
+        port: 22
+        script: cd $HOME/explorer && git checkout main && git pull && pm2 restart explorer
