@@ -1,21 +1,16 @@
 name: auto-deploy
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-  
+on: [push]
 jobs:
-  deploy:
-    name: run pull
+
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: install ssh keys
-      run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.PROD_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.PROD_HOST }} > ~/.ssh/known_hosts
-    - name: connect and pull
-      run: ssh ${{ secrets.PROD_USERNAME }}@${{ secrets.SSH_HOST }} "cd explorer && git checkout main && git pull && pm2 restart explorer"
-    - name: cleanup
-      run: rm -rf ~/.ssh
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.PROD_HOST }}
+        username: ${{ secrets.PROD_USERNAME }}
+        key: ${{ secrets.PROD_PRIVATE_KEY }}
+        port: 22
+        script: whoami
