@@ -1,17 +1,21 @@
 name: auto-deploy
-
-on: push
-
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main'
+    name: run pull
     runs-on: ubuntu-latest
     steps:
-      - name: Production Auto-Deploy
-        if: github.ref == 'refs/heads/main'
-        uses: garygrossgarten/github-action-ssh@0.7.0
-        with:
-          command: ls -l
-          host: ${{ secrets.PROD_HOST }}
-          username: ${{ secrets.PROD_USERNAME }}
-          privateKey: ${{ secrets.PROD_PRIVATE_KEY}}
+    - name: install ssh keys
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.PROD_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.PROD_HOST }} > ~/.ssh/known_hosts
+    - name: connect and pull
+      run: ssh ${{ secrets.PROD_USERNAME }}@${{ secrets.SSH_HOST }} "cd explorer && git checkout main && git pull && pm2 restart explorer"
+    - name: cleanup
+      run: rm -rf ~/.ssh
