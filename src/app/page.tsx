@@ -1,15 +1,13 @@
-import Communities from "./communities";
+import CommunityGrid from "./components/community-grid";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <main>
       <div className="flex justify-center">
-        <div className="w-full max-w-5xl p-5 prose">
-          <div className="grid grid-cols-3 gap-5">
-            <Communities />
-            <Communities />
-            <Communities />
+        <div className="w-full p-5 prose text-gray-800 max-w-7xl">
+          <div className="grid grid-cols-3 gap-6">
+            <CommunityGrid />
           </div>
         </div>
       </div>
@@ -17,4 +15,4 @@ export default function Home() {
   );
 }
 
-export const revalidate = 60 * 60; // 1 hour
+//export const revalidate = 60 * 60; // 1 hour

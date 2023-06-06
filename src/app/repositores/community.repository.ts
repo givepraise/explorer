@@ -1,35 +1,12 @@
-import { MongoClient, ObjectId } from "mongodb";
-
-import Image from "next/image";
+import { Community } from "../interfaces/community.interface";
+import { MongoClient } from "mongodb";
 import { subDays } from "date-fns";
 
 const MONGO_DB = process.env.MONGO_DB || "";
 const MONGO_URI = process.env.MONGO_URI || "";
 const MAIN_MONGO_URI = MONGO_URI.replace("{db}", MONGO_DB);
 
-interface Community {
-  _id: ObjectId;
-  name: string;
-  hostname: string;
-  totalPraises: number;
-  totalUsers: number;
-  logo: string;
-  praisesLastWeek: number;
-  praisesWeekBeforeLast: number;
-  usersLastWeek: number;
-  usersWeekBeforeLast: number;
-}
-
-function percentageChange(dividend: number, divisor: number): number {
-  // Returns percentage change in praises
-  if (divisor === 0) {
-    return dividend > 0 ? 100 : 0;
-  }
-
-  return (dividend / divisor) * 100;
-}
-
-class CommunityRepository {
+export class CommunityRepository {
   client: MongoClient;
 
   constructor() {
@@ -45,6 +22,7 @@ class CommunityRepository {
     const communityCollection = db.collection<Community>("communities");
     let communities = await communityCollection.find().toArray();
     for (let community of communities) {
+      community._id = community._id.toString();
       await this.populateCommunityData(community);
     }
     return communities;
@@ -120,53 +98,4 @@ class CommunityRepository {
       createdAt: { $gte: twoWeeksAgo, $lt: oneWeekAgo },
     });
   }
-}
-
-export default async function Communities() {
-  const communityRepo = new CommunityRepository();
-  await communityRepo.connect();
-  const communities = await communityRepo.findAllCommunities();
-  return (
-    <>
-      {communities.map((community) => {
-        return (
-          <div
-            key={community._id.toString()}
-            className="inline-block p-5 border bg-slate-100"
-          >
-            <Image
-              width={100}
-              height={100}
-              alt={community.name}
-              className="mt-0 mb-5"
-              src={`${process.env.PINATA_DEDICATED_GATEWAY}${community.logo}`}
-            />
-            Name:{" "}
-            <a href={`https://${community.hostname}`} target="_blank">
-              {community.name}
-            </a>
-            <br />
-            Total number of praise: {community.totalPraises}
-            <br />
-            Number of praise last 7 days: {community.praisesLastWeek} (
-            {percentageChange(
-              community.praisesLastWeek,
-              community.praisesWeekBeforeLast
-            )}
-            %)
-            <br />
-            Number of users: {community.totalUsers}
-            <br />
-            Number of users last 7 days: {community.usersLastWeek} (
-            {percentageChange(
-              community.usersLastWeek,
-              community.usersWeekBeforeLast
-            )}
-            %)
-            <br />
-          </div>
-        );
-      })}
-    </>
-  );
 }
