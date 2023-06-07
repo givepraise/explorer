@@ -34,8 +34,9 @@ export default async function Home() {
       <div className="flex justify-center ">
         <div className="mx-5 prose prose-base md:prose-xl">
           <h1 className="text-center py-28">
-            Last seven days, {formatNumber(communities.length)} communities gave
-            a total of <u>{formatNumber(totalPraisesLastWeek)}</u> praise!
+            Last seven days, members in {formatNumber(communities.length)}{" "}
+            communities gave a total of{" "}
+            <u>{formatNumber(totalPraisesLastWeek)}</u> praise!
           </h1>
         </div>
       </div>

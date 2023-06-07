@@ -4,25 +4,26 @@ import Footer from "./components/footer";
 import Menu from "./components/menu";
 import { Metadata } from "next";
 
-const SITE_URL = "https://explorer.givepraise.xyz";
-const SITE_NAME = "Building a culture of giving and gratitude | Praise 🙏";
-const SITE_DESCRIPTION =
+const WEBSITE_URL = "https://explorer.givepraise.xyz";
+const IMAGE_URL = "/img/preview.png";
+const NAME = " Praise 🙏 | Building a culture of giving and gratitude";
+const TITLE = "Explorer: Access all communities on Praise";
+const DESCRIPTION =
   "Praise is a rewards system allowing communities to acknowledge and reward member contributions.";
-const SITE_IMAGE = "/img/preview.png";
 const SOCIAL_TWITTER = "@givepraise";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: SITE_NAME,
-  description: SITE_DESCRIPTION,
+  metadataBase: new URL(WEBSITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
   openGraph: {
-    title: SITE_NAME,
-    description: SITE_DESCRIPTION,
-    url: SITE_URL,
-    siteName: SITE_NAME,
+    title: TITLE,
+    description: DESCRIPTION,
+    url: WEBSITE_URL,
+    siteName: NAME,
     images: [
       {
-        url: SITE_IMAGE,
+        url: IMAGE_URL,
         width: 500,
         height: 250,
       },
@@ -32,10 +33,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_NAME,
-    description: SITE_DESCRIPTION,
+    title: TITLE,
+    description: DESCRIPTION,
     creator: SOCIAL_TWITTER,
-    images: [SITE_IMAGE],
+    images: [IMAGE_URL],
   },
 };
 
