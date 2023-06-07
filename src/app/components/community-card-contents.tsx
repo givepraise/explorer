@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { Community } from "../interfaces/community.interface";
-import UsersRow from "./users-row";
-import PraiseRow from "./praise-row";
+import Image from "next/image";
 import ImageWithFallback from "./image-with-fallback";
+import PraiseRow from "./praise-row";
+import UsersRow from "./users-row";
 
 function toTitleCase(str: string): string {
   return str.toLowerCase().replace(/(^|\s)\w/g, (match) => {
@@ -40,9 +40,9 @@ export default function CommunityCardContents({
           </a>
         </div>
       </div>
-      <UsersRow community={community} />
-      <div className="my-3 border-t border-gray-300"></div>
       <PraiseRow community={community} />
+      <div className="my-3 border-t border-gray-300"></div>
+      <UsersRow community={community} />
     </>
   );
 }

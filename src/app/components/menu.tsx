@@ -1,9 +1,9 @@
 "use client";
 
+import { FaBars, FaTimes } from "react-icons/fa";
 import { OverlapHover, OverlapHoverSvg } from "react-overlap";
 import { useEffect, useState } from "react";
 
-import { FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -81,7 +81,7 @@ const Menu = () => {
           <Link href="https://docs.givepraise.xyz" target="_blank">
             <span className="ml-2 text-gray-800 hover:text-pink-600">Docs</span>
           </Link>
-          <Link href="https://mirror.xyz/givepraise.eth" target="_blank">
+          <Link href="https://givepraise.substack.com" target="_blank">
             <span className="ml-2 text-gray-800 hover:text-pink-600">Blog</span>
           </Link>
           <Link href="https://explorer.givepraise.xyz">
@@ -92,7 +92,6 @@ const Menu = () => {
           <Link
             href="https://givepraise.xyz/waitlist"
             className="p-2 px-4 font-bold text-white rounded-full bg-themecolor-3 hover:bg-themecolor-4"
-            target="_blank"
           >
             Get Praise!
           </Link>
@@ -129,8 +128,7 @@ const Menu = () => {
             <div className="flex flex-col mt-8 space-y-8 text-5xl">
               <div className="flex justify-center">
                 <Link
-                  href="https://givepraise.xyz/docs/"
-                  target="_blank"
+                  href="https://docs.givepraise.xyz"
                   onClick={handleMenuToggle}
                 >
                   <span className="text-gray-800 hover:text-pink-600">
@@ -140,7 +138,7 @@ const Menu = () => {
               </div>
               <div className="flex justify-center">
                 <Link
-                  href="https://mirror.xyz/givepraise.eth"
+                  href="https://givepraise.substack.com/"
                   target="_blank"
                   onClick={handleMenuToggle}
                 >
@@ -152,7 +150,6 @@ const Menu = () => {
               <div className="flex justify-center">
                 <Link
                   href="https://explorer.givepraise.xyz"
-                  target="_blank"
                   onClick={handleMenuToggle}
                 >
                   <span className="text-gray-800 hover:text-pink-600">
@@ -161,7 +158,10 @@ const Menu = () => {
                 </Link>
               </div>
               <div className="flex justify-center">
-                <Link href="/waitlist" onClick={handleMenuToggle}>
+                <Link
+                  href="https://givepraise.xyz/waitlist"
+                  onClick={handleMenuToggle}
+                >
                   <button className="text-gray-800 hover:text-pink-600">
                     Get Praise!
                   </button>
