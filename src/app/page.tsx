@@ -1,6 +1,7 @@
 import CommunityCard from "./components/community-card";
 import CommunityCardContents from "./components/community-card-contents";
 import { CommunityRepository } from "./repositores/community.repository";
+import { formatNumber } from "./util/formatNumber";
 
 export default async function Home() {
   const communityRepo = new CommunityRepository();
@@ -33,8 +34,8 @@ export default async function Home() {
       <div className="flex justify-center ">
         <div className="mx-5 prose prose-base md:prose-xl">
           <h1 className="text-center py-28">
-            Last seven days, {communities.length} communities gave a total of{" "}
-            <u>{totalPraisesLastWeek}</u> praise!
+            Last seven days, {formatNumber(communities.length)} communities gave
+            a total of <u>{formatNumber(totalPraisesLastWeek)}</u> praise!
           </h1>
         </div>
       </div>
