@@ -1,10 +1,8 @@
 import CommunityGrid from "./components/community-grid";
-import { Head } from "./components/head";
 
 export default function Home() {
   return (
     <main>
-      <Head />
       <div className="flex justify-center ">
         <div className="prose prose-base md:prose-xl">
           <h1 className="text-center py-28">Communities using Praise</h1>
@@ -21,4 +19,4 @@ export default function Home() {
   );
 }
 
-//export const revalidate = 60 * 60; // 1 hour
+export const revalidate = 60 * 60; // 1 hour
