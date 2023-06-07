@@ -19,6 +19,7 @@ jobs:
         script: | 
           cd $HOME/explorer
           git checkout main
+          git checkout -- .
           git pull
           pm2 delete explorer
           yarn install
