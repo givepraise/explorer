@@ -1,11 +1,17 @@
 import CommunityGrid from "./components/community-grid";
-import Image from "next/image";
+import { Head } from "./components/head";
 
 export default function Home() {
   return (
     <main>
+      <Head />
+      <div className="flex justify-center ">
+        <div className="prose prose-base md:prose-xl">
+          <h1 className="text-center py-28">Communities using Praise</h1>
+        </div>
+      </div>
       <div className="flex justify-center">
-        <div className="w-full p-5 prose text-gray-800 max-w-7xl">
+        <div className="w-full p-5 prose text-gray-800 prose-base max-w-7xl">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 sm:grid-cols-2">
             <CommunityGrid />
           </div>
