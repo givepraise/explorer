@@ -16,4 +16,12 @@ jobs:
         username: ${{ secrets.PROD_USERNAME }}
         key: ${{ secrets.PROD_PRIVATE_KEY }}
         port: 22
-        script: cd $HOME/explorer && git checkout main && git pull && pm2 restart explorer
+        script: | 
+          cd $HOME/explorer
+          git checkout main
+          git pull
+          pm2 delete explorer
+          yarn install
+          yarn run build
+          pm2 start "yarn start" --name explorer --watch
+          pm2 save
