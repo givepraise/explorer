@@ -10,7 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen mx-1 font-helvetica-neue">
+      <body className="relative min-h-screen mx-1 font-helvetica-neu">
         <div className="bg"></div>
         <Menu />
         <div className="mb-24">{children}</div>
