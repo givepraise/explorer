@@ -30,3 +30,14 @@
   font-style: normal;
   font-display: swap;
 }
+
+.bg {
+  @apply absolute top-0 bottom-0 left-0 flex-grow w-full -z-10;
+  background-image: radial-gradient(
+      circle at 80.99% 40%,
+      #ad1a7e83,
+      transparent 50%
+    ),
+    url(/img/noise.svg);
+  filter: contrast(1.8);
+}
