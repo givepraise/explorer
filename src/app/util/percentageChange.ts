@@ -3,7 +3,8 @@ export function percentageChange(dividend: number, divisor: number): number {
     return dividend > 0 ? 100 : 0;
   }
 
-  const percentage = (dividend / divisor) * 100;
+  const percentage = (dividend / divisor) * 100 - 100;
   const roundedPercentage = Math.floor(percentage);
+
   return roundedPercentage;
 }
